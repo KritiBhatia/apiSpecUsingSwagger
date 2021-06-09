@@ -1,0 +1,76 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Kriti_Bhatia/MyDemo/1.0.0
+info:
+  description: This is an API for my learning purpose
+  version: "1.0.0"
+  title: MyDemo API
+  contact:
+    email: kriti.bhatia163@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: Search
+    description: Searches for the customer document
+
+paths:
+  /search:
+    
+    post:
+      tags: 
+        - Search
+        
+      summary: searches document for a customer
+      description: Searches a document for the customer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/searchDoc'
+      responses:
+        200:
+          description: The document has been found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/searchDoc'
+        500:
+          $ref: '#/components/responses/500ApiError'
+components:
+  schemas:
+    searchDoc:
+      type: object
+      required:
+        - name
+        - docID
+      properties:
+        name:
+          type: string
+          example: Kriti
+        docID:
+          type: integer
+          example: 1
+        phone:
+          type: string
+          example: '1234567890'
+  responses:
+    500ApiError:
+      description: Oops! Error has occured!
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              statusCode:
+                type: string
+                example: 500
+              message:
+                type: string
+                example: Oops! It's an error!
+
+
